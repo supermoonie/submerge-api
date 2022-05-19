@@ -24,12 +24,12 @@ public class Font implements Serializable {
     /**
      * Font color
      */
-    private String color = "#fffff9";
+    private String color = "#fffffff9";
 
     /**
      * Outline color
      */
-    private String outlineColor = "#000000";
+    private String outlineColor = "#ff000000";
 
     /**
      * Outline width

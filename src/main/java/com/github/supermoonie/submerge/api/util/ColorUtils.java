@@ -1,11 +1,35 @@
 package com.github.supermoonie.submerge.api.util;
 
+import com.github.supermoonie.submerge.api.color.AlphaColor;
 import com.github.supermoonie.submerge.api.exception.InvalidColorCode;
 
 import java.awt.*;
 
 
 public final class ColorUtils {
+
+    public static String alphaColorToHAABBGGRR(AlphaColor color) {
+        if (null == color) return "&H00000000";
+        return String.format("&H%02x%02x%02x%02x", color.getAlpha(), color.getBlue(), color.getGreen(), color.getRed()).toUpperCase();
+    }
+
+    public static AlphaColor HAABBGGRRToAlphaColor(String haabbggrr) {
+        haabbggrr = haabbggrr.replaceAll("[&Hh]", "");
+        if (haabbggrr.length() == 6) {
+            String blue = haabbggrr.substring(0, 2);
+            String green = haabbggrr.substring(2, 4);
+            String red = haabbggrr.substring(4, 6);
+            return new AlphaColor(red + green + blue);
+        } else if (haabbggrr.length() == 8) {
+            String alpha = haabbggrr.substring(0, 2);
+            String blue = haabbggrr.substring(2, 4);
+            String green = haabbggrr.substring(4, 6);
+            String red = haabbggrr.substring(6, 8);
+            return new AlphaColor(alpha + red + green + blue);
+        } else {
+            throw new InvalidColorCode("Invalid pattern, must be &HAABBGGRR or &HBBGGRR");
+        }
+    }
 
     public static String alphaToHex(float alpha) {
         return Integer.toHexString((int) (255 - alpha * 255)).toUpperCase();
@@ -58,7 +82,6 @@ public final class ColorUtils {
     /**
      * Convert a &HBBGGRR to hexadecimal
      *
-     * @param haabbggrr: the color code
      * @return the hexadecimal code
      * @throws InvalidColorCode
      */
@@ -88,7 +111,6 @@ public final class ColorUtils {
     /**
      * Convert a &HBBGGRR to BGR
      *
-     * @param haabbggrr: the color code
      * @return the BGR code
      * @throws InvalidColorCode
      */

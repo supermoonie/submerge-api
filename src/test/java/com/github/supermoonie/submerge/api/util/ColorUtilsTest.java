@@ -14,4 +14,9 @@ public class ColorUtilsTest {
     public void hexToHAABBGGRR() {
         System.out.println(ColorUtils.hexToHAABBGGRR("#000000", 0.1f));
     }
+
+    @Test
+    public void haabbggrrToAlphaColor() {
+        System.out.println(ColorUtils.HAABBGGRRToAlphaColor("&H000000FF"));
+    }
 }
