@@ -222,8 +222,8 @@ public class ASSParser extends BaseParser<ASSSub> {
 			String property = StringUtils.uncapitalize(styleFormat[i].trim());
 			String value = styleLine[i].trim();
 
-			if (property.toLowerCase().indexOf("colour") > -1) {
-				// Colors can be number (bgr) or string (&HBBGGRR or &HAABBGGRR)
+			if (property.toLowerCase().contains("colour")) {
+				// Colors can be number (bgr) or string (&HBBGGRR or &HANGAR)
 				try {
 					Integer.parseInt(value);
 				} catch (NumberFormatException e) {
