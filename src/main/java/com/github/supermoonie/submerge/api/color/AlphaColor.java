@@ -8,7 +8,7 @@ import java.awt.*;
  */
 public class AlphaColor extends Color {
 
-    public static final AlphaColor WHITE = new AlphaColor(Color.WHITE, 255);
+    public static final AlphaColor WHITE = new AlphaColor(Color.WHITE, 0);
 
     private final int alpha;
 
@@ -23,8 +23,8 @@ public class AlphaColor extends Color {
     }
 
     public AlphaColor(String color) {
-        super(Integer.parseInt(color.substring((color.length() > 6) ? color.length() - 6 : 0), 16));
-        alpha = (color.length() > 6) ? Integer.parseInt(color.substring(0, color.length() - 6), 16) : 0;
+        super(Integer.parseInt(color.substring(0, 6), 16));
+        alpha = (color.length() > 6) ? (255 - Integer.parseInt(color.substring(6), 16)) : 0;
     }
 
     public AlphaColor(AlphaColor c) {
